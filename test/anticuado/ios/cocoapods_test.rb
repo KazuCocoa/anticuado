@@ -17,8 +17,11 @@ The following pod updates are available:
         cocoapods = Anticuado::IOS::CocoaPods.new
         result = cocoapods.format OUTDATED
 
-        assert_equal "- AFNetworking 2.5.4 -> 3.1.0 (latest version 3.1.0)", result[0]
-        assert_equal "- OHHTTPStubs 4.1.0 -> 5.0.0 (latest version 5.0.0)", result[1]
+        expected_0 = { library_name: "AFNetworking", current_version: "2.5.4", available_version: "3.1.0", latest_version: "3.1.0" }
+        expected_1 = { library_name: "OHHTTPStubs", current_version: "4.1.0", available_version: "5.0.0", latest_version: "5.0.0" }
+
+        assert_equal expected_0, result[0]
+        assert_equal expected_1, result[1]
       end
     end
   end

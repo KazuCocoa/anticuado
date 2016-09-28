@@ -15,7 +15,15 @@ module Anticuado
       def format(outdated)
         array = outdated.split(/\R/)
         index = array.find_index("The following pod updates are available:")
-        array[index + 1..array.size]
+        array[index + 1..array.size].map do |library|
+          versions = library.split(/\s/) # e.g. ["-", "AFNetworking", "2.5.4", "->", "3.1.0", "(latest", "version", "3.1.0)"]
+          {
+              library_name: versions[1],
+              current_version: versions[2],
+              available_version: versions[4],
+              latest_version: versions[7].delete(")")
+          }
+        end
       end
     end # class CocoaPods
   end # module IOS
