@@ -15,6 +15,9 @@ module Anticuado
       def format(outdated)
         array = outdated.split(/\R/)
         index = array.find_index("The following pod updates are available:")
+
+        return [] if index.nil?
+
         array[index + 1..array.size].map do |library|
           versions = library.split(/\s/) # e.g. ["-", "AFNetworking", "2.5.4", "->", "3.1.0", "(latest", "version", "3.1.0)"]
           {
