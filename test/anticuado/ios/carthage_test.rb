@@ -19,8 +19,8 @@ All dependencies are up to date.
 
 
       def test_with_format_have_update
-        cocoapods = Anticuado::IOS::Carthage.new
-        result = cocoapods.format OUTDATED_HAVE_UPDATE
+        carthage = Anticuado::IOS::Carthage.new
+        result = carthage.format OUTDATED_HAVE_UPDATE
 
         expected_0 = { library_name: "Result", current_version: "2.0.0", available_version: "2.1.3", latest_version: "2.1.3" }
 
@@ -28,8 +28,8 @@ All dependencies are up to date.
       end
 
       def test_with_format_no_update
-        cocoapods = Anticuado::IOS::Carthage.new
-        result = cocoapods.format OUTDATED_NO_UPDATE
+        carthage = Anticuado::IOS::Carthage.new
+        result = carthage.format OUTDATED_NO_UPDATE
 
         expected = []
         assert_equal expected, result
