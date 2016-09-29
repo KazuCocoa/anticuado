@@ -1,18 +1,15 @@
 module Anticuado
   module Elixir
-    class Hex
-      def initialize
-        @outdated = ""
-      end
-
-      def outdated
-        @outdated = `mix hex.outdated`
+    module Hex
+      def self.outdated
+        return "" if `which mix`.empty?
+        `mix hex.outdated`
       end
 
       # @param [String] outdated The result of command `mix hex.outdated`
       # @return [Array] Array include outdated data.
       #                 If target project have no outdated data, then return blank array such as `[]`
-      def format(outdated)
+      def self.format(outdated)
         array = outdated.split(/\R/)
         index = array.find_index("Dependency           Current  Latest  Requirement")
 
@@ -35,6 +32,6 @@ module Anticuado
           acc
         end
       end
-    end # class Hex
+    end # module Hex
   end # module Elixir
 end # module Anticuado

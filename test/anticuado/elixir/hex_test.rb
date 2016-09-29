@@ -40,8 +40,7 @@ revision_plate_ex    0.2.0    0.2.0   ~> 0.2
       OUTDATED
 
       def test_with_format_have_update
-        hex = Anticuado::Elixir::Hex.new
-        result = hex.format OUTDATED_HAVE_UPDATE
+        result = Anticuado::Elixir::Hex.format OUTDATED_HAVE_UPDATE
 
         expected_0 = { library_name: "logger_file_backend", current_version: "0.0.8", available_version: "0.0.9", latest_version: "0.0.9" }
         expected_1 = { library_name: "postgrex", current_version: "0.11.2", available_version: "0.12.0", latest_version: "0.12.0" }
@@ -51,8 +50,7 @@ revision_plate_ex    0.2.0    0.2.0   ~> 0.2
       end
 
       def test_with_format_no_update
-        hex = Anticuado::Elixir::Hex.new
-        result = hex.format OUTDATED_NO_UPDATE
+        result = Anticuado::Elixir::Hex.format OUTDATED_NO_UPDATE
 
         expected = []
         assert_equal expected, result

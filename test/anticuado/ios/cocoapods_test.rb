@@ -21,8 +21,7 @@ Analyzing dependencies
 
 
       def test_with_format_have_update
-        cocoapods = Anticuado::IOS::CocoaPods.new
-        result = cocoapods.format OUTDATED_HAVE_UPDATE
+        result = Anticuado::IOS::CocoaPods.format OUTDATED_HAVE_UPDATE
 
         expected_0 = { library_name: "AFNetworking", current_version: "2.5.4", available_version: "3.1.0", latest_version: "3.1.0" }
         expected_1 = { library_name: "OHHTTPStubs", current_version: "4.1.0", available_version: "5.0.0", latest_version: "5.0.0" }
@@ -32,8 +31,7 @@ Analyzing dependencies
       end
 
       def test_with_format_no_update
-        cocoapods = Anticuado::IOS::CocoaPods.new
-        result = cocoapods.format OUTDATED_NO_UPDATE
+        result = Anticuado::IOS::CocoaPods.format OUTDATED_NO_UPDATE
 
         expected = []
         assert_equal expected, result
