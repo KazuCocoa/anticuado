@@ -13,9 +13,20 @@ module Anticuado
       # @return [Array] Array include outdated data.
       #                 If target project have no outdated data, then return blank array such as `[]`
       def format(outdated)
-        outdated.each_line.map { |line|
-          # do something
-        }
+        array = outdated.split(/\R/)
+        index = array.find_index("The following dependencies are outdated:")
+
+        return [] if index.nil?
+
+        array[index + 1..array.size].map do |library|
+          versions = library.split(/[\s|"]/) # e.g. ["Result", "", "2.0.0", "", "->", "", "2.1.3"]
+          {
+              library_name: versions[0],
+              current_version: versions[2],
+              available_version: versions[6],
+              latest_version: versions[6]
+          }
+        end
       end
     end # class Carthage
   end # module IOS
