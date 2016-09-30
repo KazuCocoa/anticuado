@@ -11,6 +11,8 @@ Analyzing dependencies
 The following pod updates are available:
 - AFNetworking 2.5.4 -> 3.1.0 (latest version 3.1.0)
 - OHHTTPStubs 4.1.0 -> 5.0.0 (latest version 5.0.0)
+
+[!] CocoaPods was not able to update the `master` repo. If this is an unexpected issue and persists you can inspect it running `pod repo update --verbose`
       OUTDATED
 
       OUTDATED_NO_UPDATE =<<-OUTDATED
@@ -28,6 +30,7 @@ Analyzing dependencies
 
         assert_equal expected_0, result[0]
         assert_equal expected_1, result[1]
+        assert_equal nil, result[2]
       end
 
       def test_with_format_no_update

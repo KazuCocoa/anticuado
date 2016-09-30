@@ -1,9 +1,14 @@
 module Anticuado
   module IOS
     module CocoaPods
-      def self.outdated
+      def self.outdated(project = nil)
         return "" if `which pod`.empty?
-        `pod outdated`
+
+        if project
+          `pod outdated --project-directory=#{project}`
+        else
+          `pod outdated`
+        end
       end
 
       # @param [String] outdated The result of command `pod outdated`
@@ -15,15 +20,17 @@ module Anticuado
 
         return [] if index.nil?
 
-        array[index + 1..array.size].map do |library|
+        array[index + 1..array.size].map { |library|
           versions = library.split(/\s/) # e.g. ["-", "AFNetworking", "2.5.4", "->", "3.1.0", "(latest", "version", "3.1.0)"]
-          {
-              library_name: versions[1],
-              current_version: versions[2],
-              available_version: versions[4],
-              latest_version: versions[7].delete(")")
-          }
-        end
+          if versions[0] == "-"
+            {
+                library_name: versions[1],
+                current_version: versions[2],
+                available_version: versions[4],
+                latest_version: versions[7].delete(")")
+            }
+          end
+        }.compact
       end
     end # module CocoaPods
   end # module IOS
