@@ -1,8 +1,6 @@
 # Anticuado
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/anticuado`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This library collect output
 
 ## Installation
 
@@ -22,13 +20,90 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This library's results are like the following format:
 
-## Development
+```ruby
+[
+  { 
+    library_name: "AFNetworking",
+    current_version: "2.5.0",
+    available_version: "3.1.0",
+    latest_version: "3.1.0"
+  },
+  { 
+    library_name: "OHHTTPStubs",
+    current_version: "4.1.0",
+    available_version: "5.0.0",
+    latest_version: "5.0.0"
+  }
+]
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+### iOS
+#### CocoaPods
+1. install `cocoadpos`. Read [official document](https://cocoapods.org/).
+2. Run as the following script.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```ruby
+require "anticuado"
+
+outdated = ::Anticuado::IOS::CocoaPods.outdated project: "path/to/project"
+::Anticuado::IOS::CocoaPods.format outdated
+```
+
+#### Carthage
+1. install `carthage`. Read [official document](https://github.com/Carthage/Carthage).
+2. Run as the following script.
+
+```ruby
+require "anticuado"
+
+outdated = ::Anticuado::IOS::Carthage.outdated project: "path/to/project"
+::Anticuado::IOS::Carthage.format outdated
+```
+
+### Android
+#### Gradle
+
+https://github.com/ben-manes/gradle-versions-plugin
+
+1. install `mix`. Read [official document](http://elixir-lang.org/install.html).
+2. Run as the following script.
+
+```ruby
+require "anticuado"
+
+::Anticuado::Java::Gradle.outdated project: "path/to/project"
+outdated = ::Anticuado::Java::Gradle.parse_json "build/dependencyUpdates"
+::Anticuado::Java::Gradle.format outdated
+```
+
+### Elixir
+#### Hex
+1. install `mix`. Read [official document](http://elixir-lang.org/install.html).
+2. Run as the following script.
+
+```ruby
+require "anticuado"
+
+outdated = ::Anticuado::Elixir::Hex.outdated project: "path/to/project"
+::Anticuado::Elixir::Hex.format outdated
+```
+
+### Ruby
+#### Bundler
+1. install `bundler`. Read [official document](http://bundler.io/).
+2. Run as the following script.
+
+```ruby
+require "anticuado"
+
+outdated = ::Anticuado::Ruby::Bundler.outdated project: "path/to/project"
+::Anticuado::Ruby::Bundler.format outdated
+```
+
+## In advance
+
 
 ## Contributing
 
