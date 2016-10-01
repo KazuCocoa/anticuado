@@ -1,0 +1,52 @@
+{
+  "current": {
+    "dependencies": [
+      {
+        "group": "backport-util-concurrent",
+        "version": "3.1",
+        "name": "backport-util-concurrent"
+      },
+      {
+        "group": "backport-util-concurrent",
+        "version": "3.1",
+        "name": "backport-util-concurrent-java12"
+      }
+    ],
+    "count": 2
+  },
+  "exceeded": {
+    "dependencies": [
+      {
+        "group": "com.google.guava",
+        "latest": "16.0-rc1",
+        "version": "99.0-SNAPSHOT",
+        "name": "guava"
+      },
+      {
+        "group": "com.google.guava",
+        "latest": "16.0-rc1",
+        "version": "99.0-SNAPSHOT",
+        "name": "guava-tests"
+      }
+    ],
+    "count": 2
+  },
+  "unresolved": {
+    "dependencies": [
+      {
+        "group": "com.github.ben-manes",
+        "version": "1.0",
+        "reason": "Could not find any version that matches com.github.ben-manes:unresolvable:latest.milestone.",
+        "name": "unresolvable"
+      },
+      {
+        "group": "com.github.ben-manes",
+        "version": "1.0",
+        "reason": "Could not find any version that matches com.github.ben-manes:unresolvable2:latest.milestone.",
+        "name": "unresolvable2"
+      }
+    ],
+    "count": 2
+  },
+  "count": 8
+}

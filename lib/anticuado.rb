@@ -3,7 +3,7 @@ require "anticuado/version"
 require "anticuado/ios/carthage"
 require "anticuado/ios/cocoapods"
 
-require "anticuado/android/gradle"
+require "anticuado/java/gradle"
 
 require "anticuado/elixir/hex"
 
