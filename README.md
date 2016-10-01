@@ -68,7 +68,7 @@ outdated = ::Anticuado::IOS::Carthage.outdated project: "path/to/project"
 This library require the following plugin to collect library versions.
 https://github.com/ben-manes/gradle-versions-plugin
 
-1. install `mix`. Read [official document](http://elixir-lang.org/install.html).
+1. install `gradle` or set gradle wrapper, `gradlew`. Read [official document](https://gradle.org/).
 2. Run as the following script.
 
 ```ruby
