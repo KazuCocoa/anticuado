@@ -4,11 +4,22 @@ module Anticuado
   module Java
     class Gradle
       # require: https://github.com/ben-manes/gradle-versions-plugin
+      # @param [Bool] wrapper Use gradle wrapper or use gradle directory.
       # @param [String] revision "release", "milestone" or "integration". Default is "release".
       # @param [String] format "plain", "json" or "xml". Default is "json".
       # @param [String] outdir Path to output the result. Default is "build/dependencyUpdates".
-      def self.outdated(revision: "release", format: "json", outdir: "build/dependencyUpdates")
-        `./gradlew dependencyUpdates -Drevision=#{revision} -DoutputFormatter=#{format} -DoutputDir=#{outdir}`
+      def self.outdated(wrapper: false, project: nil, revision: "release", format: "json", outdir: "build/dependencyUpdates")
+        return puts "have no gradle command" if !wrapper && `which gradle`.empty?
+
+        if project
+          current_dir = Dir.pwd
+          Dir.chdir project
+          `#{gradle(wrapper)} dependencyUpdates -Drevision=#{revision} -DoutputFormatter=#{format} -DoutputDir=#{outdir}`
+          Dir.chdir current_dir
+        else
+          `#{gradle(wrapper)} dependencyUpdates -Drevision=#{revision} -DoutputFormatter=#{format} -DoutputDir=#{outdir}`
+        end
+
         puts "output file is #{outdir}"
       end
 
@@ -35,6 +46,13 @@ module Anticuado
               latest_version: library["available"]["release"]
           }
         }
+      end
+
+      private
+
+      def self.gradle(wrapper = false)
+        return "./gradlew" if wrapper
+        "gradle"
       end
     end # module Gradle
   end # module Android

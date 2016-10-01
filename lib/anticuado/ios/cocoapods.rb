@@ -3,8 +3,8 @@ module Anticuado
     module CocoaPods
       # @param [String] project Path to project directory.
       # @return [String] The result of command `pod outdated`.
-      def self.outdated(project = nil)
-        return "have no pod command" if `which pod`.empty?
+      def self.outdated(project: nil)
+        return puts "have no pod command" if `which pod`.empty?
 
         if project
           `pod outdated --project-directory=#{project}`

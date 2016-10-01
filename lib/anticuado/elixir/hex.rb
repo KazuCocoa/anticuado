@@ -3,8 +3,8 @@ module Anticuado
     module Hex
       # @param [String] project Path to project directory.
       # @return [String] The result of command `mix hex.outdated`.
-      def self.outdated(project = nil)
-        return "have no mix command" if `which mix`.empty?
+      def self.outdated(project: nil)
+        return puts "have no mix command" if `which mix`.empty?
 
         if project
           current_dir = Dir.pwd

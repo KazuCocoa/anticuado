@@ -1,8 +1,8 @@
 module Anticuado
   module Ruby
     module Bundler
-      def self.outdated(project = nil)
-        return "have no bundle command" if `which bundle`.empty?
+      def self.outdated(project: nil)
+        return puts "have no bundle command" if `which bundle`.empty?
 
         if project
           current_dir = Dir.pwd
