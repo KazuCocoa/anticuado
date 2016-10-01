@@ -2,7 +2,7 @@ module Anticuado
   module IOS
     module CocoaPods
       def self.outdated(project = nil)
-        return "" if `which pod`.empty?
+        return "have no pod command" if `which pod`.empty?
 
         if project
           `pod outdated --project-directory=#{project}`

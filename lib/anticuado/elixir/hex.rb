@@ -1,9 +1,18 @@
 module Anticuado
   module Elixir
     module Hex
-      def self.outdated
-        return "" if `which mix`.empty?
-        `mix hex.outdated`
+      def self.outdated(project = nil)
+        return "have no mix command" if `which mix`.empty?
+
+        if project
+          current_dir = Dir.pwd
+          Dir.chdir project
+          outdated_str = `mix hex.outdated`
+          Dir.chdir current_dir
+        else
+          outdated_str = `mix hex.outdated`
+        end
+        outdated_str
       end
 
       # @param [String] outdated The result of command `mix hex.outdated`

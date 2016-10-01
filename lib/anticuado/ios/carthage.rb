@@ -2,7 +2,7 @@ module Anticuado
   module IOS
     module Carthage
       def self.outdated(project = nil)
-        return "" if `which carthage`.empty?
+        return "have no carthage command" if `which carthage`.empty?
 
         if project
           `carthage outdated --project-directory #{project}`
