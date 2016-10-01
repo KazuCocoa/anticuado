@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["fly.49.89.over@gmail.com"]
 
   spec.summary       = %q{Collect and arrange some outdated libraries for several platforms}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
+  spec.description   = %q{Collect and arrange some outdated libraries for several platforms}
   spec.homepage      = "https://github.com/KazuCocoa/anticuado"
   spec.license       = "MIT"
 
