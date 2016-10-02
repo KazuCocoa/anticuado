@@ -5,7 +5,6 @@ module Anticuado
     class HexTest < Minitest::Test
 
       OUTDATED_HAVE_UPDATE =<<-OUTDATED
-A new Hex version is available (0.13.2), please update with `mix local.hex`
 Dependency           Current  Latest  Requirement
 cowboy               1.0.4    1.0.4   ~> 1.0
 credo                0.4.11   0.4.11  ~> 0.3
@@ -21,6 +20,8 @@ phoenix_live_reload  1.0.5    1.0.5   ~> 1.0
 phoenix_pubsub       1.0.0    1.0.0   ~> 1.0
 postgrex             0.11.2   0.12.0  ~> 0.11.2
 revision_plate_ex    0.2.0    0.2.0   ~> 0.2
+
+A green version in latest means you have the latest version of a given package. A green requirement means your current requirement matches the latest version.
       OUTDATED
 
       OUTDATED_NO_UPDATE =<<-OUTDATED

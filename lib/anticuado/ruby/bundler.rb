@@ -19,7 +19,7 @@ module Anticuado
       # @return [Array] Array include outdated data.
       #                 If target project have no outdated data, then return blank array such as `[]`
       def self.format(outdated)
-        array = outdated.split(/\R/)
+        array = outdated.split(/\R/).map(&:strip)
         index = array.find_index("Outdated gems included in the bundle:")
 
         return [] if index.nil?

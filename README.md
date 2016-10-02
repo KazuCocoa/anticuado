@@ -1,6 +1,17 @@
 # Anticuado
 
-This library collect output
+This library collect __outdated__ libraries for each platforms.
+
+## Support
+- Java
+    - Gradle
+- iOS
+    - CocoaPods
+    - Carthage
+- Ruby
+    - Bundler
+- Elixir
+    - Hex
 
 ## Installation
 
