@@ -1,6 +1,6 @@
 # Anticuado
 
-This library collect __outdated__ libraries for each platforms.
+This library collect __outdated__ libraries for each platforms. [Here](https://github.com/KazuCocoa/anticuado-example) is example how to use this library.
 
 ## Support
 - Java
