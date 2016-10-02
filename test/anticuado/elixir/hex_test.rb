@@ -48,6 +48,7 @@ revision_plate_ex    0.2.0    0.2.0   ~> 0.2
 
         assert_equal expected_0, result[0]
         assert_equal expected_1, result[1]
+        assert_equal nil, result[2]
       end
 
       def test_with_format_no_update

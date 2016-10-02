@@ -28,6 +28,8 @@ module Anticuado
         return [] if index.nil?
 
         array[index + 1..array.size].reduce([]) do |acc, library|
+          break acc if library.empty?
+
           array_lib = library.split(/\s+/)
           current_version = array_lib[1]
           last_version = array_lib[2]
