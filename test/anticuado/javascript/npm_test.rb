@@ -12,9 +12,7 @@ uglify-js-brunch      1.7.8   1.7.8   2.0.1
       OUTDATED
 
       OUTDATED_NO_UPDATE =<<-OUTDATED
-*** Fetching Result
-*** Fetching Himotoki
-All dependencies are up to date.
+Package             Current  Wanted  Latest  Location
       OUTDATED
 
 
