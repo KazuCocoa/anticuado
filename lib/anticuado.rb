@@ -9,6 +9,8 @@ require "anticuado/elixir/hex"
 
 require "anticuado/ruby/bundler"
 
+require "anticuado/javascript/npm"
+
 module Anticuado
   # Your code goes here...
 end
