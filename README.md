@@ -12,6 +12,8 @@ This library collect __outdated__ libraries for each platforms. [Here](https://g
     - Bundler
 - Elixir
     - Hex
+- JavaScript
+    - npm
 
 ## Installation
 
