@@ -7,9 +7,11 @@ module Anticuado
         if project
           current_dir = Anticuado.current_dir
           Dir.chdir Anticuado.project_dir(project: project)
+          `bundle install`
           outdated_str = `bundle outdated`
           Dir.chdir current_dir
         else
+          `bundle install`
           outdated_str = `bundle outdated`
         end
         outdated_str
