@@ -12,5 +12,11 @@ require "anticuado/ruby/bundler"
 require "anticuado/javascript/npm"
 
 module Anticuado
-  # Your code goes here...
+  def self.current_dir
+    File.expand_path "."
+  end
+
+  def self.project_dir(project:)
+    File.expand_path(project, ".")
+  end
 end

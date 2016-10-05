@@ -5,8 +5,8 @@ module Anticuado
         return puts "have no bundle command" if `which bundle`.empty?
 
         if project
-          current_dir = Dir.pwd
-          Dir.chdir project
+          current_dir = Anticuado.current_dir
+          Dir.chdir Anticuado.project_dir(project: project)
           outdated_str = `bundle outdated`
           Dir.chdir current_dir
         else

@@ -7,8 +7,8 @@ module Anticuado
         return puts "have no npm command" if `which npm`.empty?
 
         if project
-          current_dir = Dir.pwd
-          Dir.chdir project
+          current_dir = Anticuado.current_dir
+          Dir.chdir Anticuado.project_dir(project: project)
           outdated_str = `npm outdated`
           Dir.chdir current_dir
         else

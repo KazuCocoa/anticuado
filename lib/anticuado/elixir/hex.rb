@@ -7,8 +7,8 @@ module Anticuado
         return puts "have no mix command" if `which mix`.empty?
 
         if project
-          current_dir = Dir.pwd
-          Dir.chdir project
+          current_dir = Anticuado.current_dir
+          Dir.chdir Anticuado.project_dir(project: project)
           outdated_str = `mix hex.outdated`
           Dir.chdir current_dir
         else
