@@ -1,5 +1,7 @@
 # Anticuado
 
+[![Build Status](https://travis-ci.org/KazuCocoa/anticuado.svg?branch=master)](https://travis-ci.org/KazuCocoa/anticuado)
+
 This library collect __outdated__ libraries for each platforms. [Here](https://github.com/KazuCocoa/anticuado-example) is example how to use this library.
 
 ## Support
