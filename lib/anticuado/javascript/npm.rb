@@ -3,12 +3,12 @@ module Anticuado
     module Npm
       # @param [String] project Path to project directory.
       # @return [String] The result of command `npm outdated`.
-      def self.outdated(project: nil)
+      def self.outdated(project = nil)
         return puts "have no npm command" if `which npm`.empty?
 
         if project
           current_dir = Anticuado.current_dir
-          Dir.chdir Anticuado.project_dir(project: project)
+          Dir.chdir Anticuado.project_dir(project)
           outdated_str = `npm outdated`
           Dir.chdir current_dir
         else

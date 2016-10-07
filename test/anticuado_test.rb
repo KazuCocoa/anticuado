@@ -7,6 +7,6 @@ class AnticuadoTest < Minitest::Test
 
   def test_project_dir
     project = "test"
-    assert_equal "#{Dir.pwd}/test", Anticuado.project_dir(project: project)
+    assert_equal "#{Dir.pwd}/test", Anticuado.project_dir(project)
   end
 end

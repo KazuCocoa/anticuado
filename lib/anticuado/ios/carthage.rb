@@ -3,7 +3,7 @@ module Anticuado
     module Carthage
       # @param [String] project Path to project directory.
       # @return [String] The result of command `carthage outdated`.
-      def self.outdated(project: nil)
+      def self.outdated(project = nil)
         return puts "have no carthage command" if `which carthage`.empty?
 
         if project

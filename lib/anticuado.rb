@@ -16,7 +16,7 @@ module Anticuado
     File.expand_path "."
   end
 
-  def self.project_dir(project:)
+  def self.project_dir(project)
     File.expand_path(project, ".")
   end
 end
