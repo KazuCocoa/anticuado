@@ -37,13 +37,13 @@ This library's results are like the following format:
 
 ```ruby
 [
-  { 
+  {
     library_name: "AFNetworking",
     current_version: "2.5.0",
     available_version: "3.1.0",
     latest_version: "3.1.0"
   },
-  { 
+  {
     library_name: "OHHTTPStubs",
     current_version: "4.1.0",
     available_version: "5.0.0",
@@ -60,7 +60,7 @@ This library's results are like the following format:
 ```ruby
 require "anticuado"
 
-outdated = ::Anticuado::IOS::CocoaPods.outdated project: "path/to/project"
+outdated = ::Anticuado::IOS::CocoaPods.outdated "path/to/project"
 ::Anticuado::IOS::CocoaPods.format outdated
 ```
 
@@ -71,7 +71,7 @@ outdated = ::Anticuado::IOS::CocoaPods.outdated project: "path/to/project"
 ```ruby
 require "anticuado"
 
-outdated = ::Anticuado::IOS::Carthage.outdated project: "path/to/project"
+outdated = ::Anticuado::IOS::Carthage.outdated "path/to/project"
 ::Anticuado::IOS::Carthage.format outdated
 ```
 
@@ -87,7 +87,7 @@ https://github.com/ben-manes/gradle-versions-plugin
 ```ruby
 require "anticuado"
 
-::Anticuado::Java::Gradle.outdated project: "path/to/project"
+::Anticuado::Java::Gradle.outdated "path/to/project"
 outdated = ::Anticuado::Java::Gradle.parse_json "build/dependencyUpdates"
 ::Anticuado::Java::Gradle.format outdated
 ```
@@ -100,7 +100,7 @@ outdated = ::Anticuado::Java::Gradle.parse_json "build/dependencyUpdates"
 ```ruby
 require "anticuado"
 
-outdated = ::Anticuado::Elixir::Hex.outdated project: "path/to/project"
+outdated = ::Anticuado::Elixir::Hex.outdated "path/to/project"
 ::Anticuado::Elixir::Hex.format outdated
 ```
 
@@ -112,7 +112,7 @@ outdated = ::Anticuado::Elixir::Hex.outdated project: "path/to/project"
 ```ruby
 require "anticuado"
 
-outdated = ::Anticuado::Ruby::Bundler.outdated project: "path/to/project"
+outdated = ::Anticuado::Ruby::Bundler.outdated "path/to/project"
 ::Anticuado::Ruby::Bundler.format outdated
 ```
 
@@ -127,4 +127,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
