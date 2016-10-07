@@ -4,11 +4,11 @@ module Anticuado
   module Java
     class Gradle
       # require: https://github.com/ben-manes/gradle-versions-plugin
-      # @param [Bool] wrapper Use gradle wrapper or use gradle directory.
       # @param [String] revision "release", "milestone" or "integration". Default is "release".
+      # @param [Bool] wrapper Use gradle wrapper or use gradle directory.
       # @param [String] format "plain", "json" or "xml". Default is "json".
       # @param [String] outdir Path to output the result. Default is "build/dependencyUpdates".
-      def self.outdated(wrapper = false, project = nil, revision = "release", format = "json", outdir = "build/dependencyUpdates")
+      def self.outdated(project = nil, wrapper = false, revision = "release", format = "json", outdir = "build/dependencyUpdates")
         return puts "have no gradle command" if !wrapper && `which gradle`.empty?
 
         if project
