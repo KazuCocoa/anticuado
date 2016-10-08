@@ -5,6 +5,7 @@ module Anticuado
       # @return [String] The result of command `mix hex.outdated`.
       def self.outdated(project = nil)
         return puts "have no mix command" if `which mix`.empty?
+        `mix local.hex --force`
 
         if project
           current_dir = Anticuado.current_dir
