@@ -9,6 +9,7 @@ module Anticuado
         if project
           current_dir = Anticuado.current_dir
           Dir.chdir Anticuado.project_dir(project)
+          `npm install`
           outdated_str = `npm outdated`
           Dir.chdir current_dir
         else
