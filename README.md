@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/KazuCocoa/anticuado.svg?branch=master)](https://travis-ci.org/KazuCocoa/anticuado)
 
 This library collect __outdated__ libraries for each platforms. [Here](https://github.com/KazuCocoa/anticuado-example) is example how to use this library.
+And [this travis project](https://travis-ci.org/KazuCocoa/anticuado-example) is just sample how to run this and the output.
+
 
 ## Support
 - Java
