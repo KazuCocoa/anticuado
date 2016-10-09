@@ -25,6 +25,7 @@ module Anticuado
       def self.format(outdated)
         array = outdated.split(/\R/).map(&:strip)
         index = array.find_index("Dependency           Current  Latest  Requirement")
+        index = array.find_index { |line| line.scan(/\ADependency\s+Current\s+Latest\s+Requirement\z/) != [] }
 
         return [] if index.nil?
 

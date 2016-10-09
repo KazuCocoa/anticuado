@@ -23,7 +23,7 @@ module Anticuado
       #                 If target project have no outdated data, then return blank array such as `[]`
       def self.format(outdated)
         array = outdated.split(/\R/).map(&:strip)
-        index = array.find_index("Package             Current  Wanted  Latest  Location")
+        index = array.find_index { |line| line.scan(/\APackage\s+Current\s+Wanted\s+Latest\s+Location\z/) != [] }
 
         return [] if index.nil?
 
