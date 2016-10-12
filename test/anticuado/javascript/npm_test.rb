@@ -5,14 +5,14 @@ module Anticuado
     class NpmTest < Minitest::Test
 
       OUTDATED_HAVE_UPDATE =<<-OUTDATED
-Package             Current  Wanted  Latest  Location
-babel-brunch          6.0.2   6.0.6   6.0.6
-clean-css-brunch      1.7.2   1.7.2   2.0.0
-uglify-js-brunch      1.7.8   1.7.8   2.0.1
+      Package             Current  Wanted  Latest  Location
+      babel-brunch          6.0.2   6.0.6   6.0.6
+      clean-css-brunch      1.7.2   1.7.2   2.0.0
+      uglify-js-brunch      1.7.8   1.7.8   2.0.1
       OUTDATED
 
       OUTDATED_NO_UPDATE =<<-OUTDATED
-Package             Current  Wanted  Latest  Location
+      Package             Current  Wanted  Latest  Location
       OUTDATED
 
 

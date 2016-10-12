@@ -10,6 +10,7 @@ require "anticuado/elixir/hex"
 require "anticuado/ruby/bundler"
 
 require "anticuado/javascript/npm"
+require "anticuado/javascript/yarn"
 
 module Anticuado
   def self.current_dir

@@ -2,7 +2,7 @@ require "json"
 
 module Anticuado
   module Java
-    class Gradle
+    module Gradle
       # require: https://github.com/ben-manes/gradle-versions-plugin
       # @param [String] revision "release", "milestone" or "integration". Default is "release".
       # @param [Bool] wrapper Use gradle wrapper or use gradle directory.
