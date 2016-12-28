@@ -1,6 +1,6 @@
 module Anticuado
   module JavaScript
-    module Yarn
+    class Yarn < Anticuado::Base
       # @param [String] project Path to project directory.
       # @return [String] The result of command `yarn outdated`.
       def self.outdated(project = nil)
@@ -37,6 +37,6 @@ module Anticuado
           }
         end
       end
-    end # module Yarn
+    end # class Yarn
   end # module JavaScript
 end # module Anticuado

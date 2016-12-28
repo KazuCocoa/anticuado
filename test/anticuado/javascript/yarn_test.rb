@@ -20,7 +20,7 @@ module Anticuado
         expected_0 = { library_name: "react", current_version: "0.14.8", available_version: "0.14.8", latest_version: "15.3.2" }
 
         assert_equal expected_0, result[0]
-        assert_equal nil, result[1]
+        assert_nil result[1]
       end
 
       def test_with_format_no_update

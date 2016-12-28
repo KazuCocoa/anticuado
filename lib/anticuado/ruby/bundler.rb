@@ -1,6 +1,6 @@
 module Anticuado
   module Ruby
-    module Bundler
+    class Bundler < Anticuado::Base
       def self.outdated(project = nil)
         return puts "have no bundle command" if `which bundle`.empty?
 
@@ -38,6 +38,6 @@ module Anticuado
           end
         }.compact
       end
-    end # module Bundler
+    end # class Bundler
   end # module Ruby
 end # module Anticuado

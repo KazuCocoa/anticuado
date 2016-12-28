@@ -1,6 +1,6 @@
 module Anticuado
   module IOS
-    module Carthage
+    class Carthage < Anticuado::Base
       # @param [String] project Path to project directory.
       # @return [String] The result of command `carthage outdated`.
       def self.outdated(project = nil)
@@ -32,6 +32,6 @@ module Anticuado
           }
         end
       end
-    end # module Carthage
+    end # class Carthage
   end # module IOS
 end # module Anticuado

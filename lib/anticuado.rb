@@ -1,4 +1,5 @@
 require "anticuado/version"
+require "anticuado/base"
 
 require "anticuado/ios/carthage"
 require "anticuado/ios/cocoapods"

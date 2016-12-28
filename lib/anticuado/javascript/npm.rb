@@ -1,6 +1,6 @@
 module Anticuado
   module JavaScript
-    module Npm
+    class Npm < Anticuado::Base
       # @param [String] project Path to project directory.
       # @return [String] The result of command `npm outdated`.
       def self.outdated(project = nil)
@@ -37,6 +37,6 @@ module Anticuado
           }
         end
       end
-    end # module Npm
+    end # class Npm
   end # module JavaScript
 end # module Anticuado

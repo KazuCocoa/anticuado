@@ -2,7 +2,7 @@ require "json"
 
 module Anticuado
   module Java
-    module Gradle
+    class Gradle < Anticuado::Base
       # require: https://github.com/ben-manes/gradle-versions-plugin
       # @param [String] revision "release", "milestone" or "integration". Default is "release".
       # @param [Bool] wrapper Use gradle wrapper or use gradle directory.
@@ -54,6 +54,6 @@ module Anticuado
         return "./gradlew" if wrapper
         "gradle"
       end
-    end # module Gradle
+    end # class Gradle
   end # module Android
 end # module Anticuado

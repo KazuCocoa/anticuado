@@ -26,7 +26,7 @@ module Anticuado
         assert_equal expected_0, result[0]
         assert_equal expected_1, result[1]
         assert_equal expected_2, result[2]
-        assert_equal nil, result[3]
+        assert_nil result[3]
       end
 
       def test_with_format_no_update

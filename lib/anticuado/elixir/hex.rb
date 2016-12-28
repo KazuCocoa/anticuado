@@ -1,6 +1,6 @@
 module Anticuado
   module Elixir
-    module Hex
+    class Hex < Anticuado::Base
       # @param [String] project Path to project directory.
       # @return [String] The result of command `mix hex.outdated`.
       def self.outdated(project = nil)
@@ -48,6 +48,6 @@ module Anticuado
           acc
         end
       end
-    end # module Hex
+    end # class Hex
   end # module Elixir
 end # module Anticuado

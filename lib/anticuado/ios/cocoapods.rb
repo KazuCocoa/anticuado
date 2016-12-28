@@ -1,6 +1,6 @@
 module Anticuado
   module IOS
-    module CocoaPods
+    class CocoaPods < Anticuado::Base
       # @param [String] project Path to project directory.
       # @return [String] The result of command `pod outdated`.
       def self.outdated(project = nil)
@@ -34,6 +34,6 @@ module Anticuado
           end
         }.compact
       end
-    end # module CocoaPods
+    end # class CocoaPods
   end # module IOS
 end # module Anticuado
