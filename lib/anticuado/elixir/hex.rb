@@ -24,8 +24,7 @@ module Anticuado
       #                 If target project have no outdated data, then return blank array such as `[]`
       def self.format(outdated)
         array = outdated.split(/\R/).map(&:strip)
-        index = array.find_index("Dependency           Current  Latest  Requirement")
-        index = array.find_index { |line| line.scan(/\ADependency\s+Current\s+Latest\s+Requirement\z/) != [] }
+        index = array.find_index { |line| line.scan(/\ADependency\s+Current\s+/) != [] }
 
         return [] if index.nil?
 
