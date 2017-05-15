@@ -52,6 +52,16 @@
         },
         "version": "2.0",
         "name": "guice-multibindings"
+      },
+      {
+        "group": "com.android.support",
+        "available": {
+          "release": "26.0.0-alpha1",
+          "milestone": null,
+          "integration": null
+        },
+        "version": "25.3.1",
+        "name": "appcompat-v7"
       }
     ],
     "count": 2
