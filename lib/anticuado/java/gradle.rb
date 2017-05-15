@@ -41,8 +41,8 @@ module Anticuado
         return [] if outdted["dependencies"].nil?
 
         outdted["dependencies"].map { |library|
-          available_version = filter(revisions: filter, string: library["available"]["release"])
-          latest_version = filter(revisions: filter, string: library["available"]["release"])
+          available_version = filter(filter, library["available"]["release"])
+          latest_version = filter(filter, library["available"]["release"])
 
           unless available_version == NO_VERSION && latest_version == NO_VERSION
             {
@@ -62,8 +62,8 @@ module Anticuado
         "gradle"
       end
 
-      def self.filter(revisions:, string:)
-        result = revisions.find { |qualifier| string.match?(/(?i).*[.-]#{qualifier}[.\d-]*/) }
+      def self.filter(revisions, string)
+        result = revisions.find { |qualifier| string.match(/(?i).*[.-]#{qualifier}[.\d-]*/) }
         return NO_VERSION if result
         string
       end
