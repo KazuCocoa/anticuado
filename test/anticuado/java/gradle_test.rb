@@ -16,12 +16,15 @@ module Anticuado
         json = Anticuado::Java::Gradle.parse_json "#{__dir__}/outdated_json.json"
         result = Anticuado::Java::Gradle.format json
 
-        expected_0 = { library_name: "guice", current_version: "2.0", available_version: "3.0", latest_version: "3.0" }
-        expected_1 = { library_name: "guice-multibindings", current_version: "2.0", available_version: "3.0", latest_version: "3.0" }
+        expected_0 = { group_name: "com.google.inject", library_name: "guice", current_version: "2.0",
+                       available_version: "3.0", latest_version: "3.0" }
+        expected_1 = { group_name: "com.google.inject.extensions", library_name: "guice-multibindings",
+                       current_version: "2.0", available_version: "3.0", latest_version: "3.0" }
 
         assert_equal expected_0, result[0]
         assert_equal expected_1, result[1]
         assert_nil result[2]
+        assert_equal 2, result.size
       end
 
       def test_with_format_no_update
