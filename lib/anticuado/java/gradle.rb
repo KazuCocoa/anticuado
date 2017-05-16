@@ -53,7 +53,7 @@ module Anticuado
                 latest_version: latest_version
             }
           end
-        }
+        }.compact
       end
 
       private
