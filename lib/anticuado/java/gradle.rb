@@ -46,6 +46,7 @@ module Anticuado
 
           unless available_version == NO_VERSION && latest_version == NO_VERSION
             {
+                group_name: library["group"],
                 library_name: library["name"],
                 current_version: library["version"],
                 available_version: available_version,
