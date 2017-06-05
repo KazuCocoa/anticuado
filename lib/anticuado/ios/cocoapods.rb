@@ -6,6 +6,8 @@ module Anticuado
       def self.outdated(project = nil)
         return puts "have no pod command" if `which pod`.empty?
 
+        `pod cache clean --all`
+
         if project
           `pod outdated --project-directory=#{project}`
         else
