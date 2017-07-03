@@ -5,6 +5,8 @@ module Anticuado
       # @return [String] The result of command `pod outdated`.
       def self.outdated(project = nil)
         return puts "have no pod command" if `which pod`.empty?
+        
+        `pod install`
 
         if project
           `pod outdated --project-directory=#{project}`
