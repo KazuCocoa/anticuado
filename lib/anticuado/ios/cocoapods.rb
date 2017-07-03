@@ -8,6 +8,8 @@ module Anticuado
         
         `pod install`
 
+        `pod cache clean --all`
+
         if project
           `pod outdated --project-directory=#{project}`
         else
