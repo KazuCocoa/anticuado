@@ -1,0 +1,9 @@
+pod 'AFNetworking', '~> 3.0'
+
+target 'Example' do
+  pod 'OHHTTPStubs', '~> 4.2.0'
+end
+
+target 'Example2' do
+  pod 'EarlGrey'
+end

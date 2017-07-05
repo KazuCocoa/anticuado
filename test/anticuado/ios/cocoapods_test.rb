@@ -40,6 +40,35 @@ Analyzing dependencies
         assert_equal expected, result
       end
 
+      def test_with_update_cocoapod
+        expected = File.read("test/anticuado/ios/cocoapod_expected1")
+
+        actual_file_path = "test/anticuado/ios/cocoapod_actual"
+        actual_output_file_path = "test/anticuado/ios/cocoapod_actual_out"
+
+        Anticuado::IOS::CocoaPods.update(pod_file_in: actual_file_path, pod_file_out: actual_output_file_path, library_name: "AFNetworking", new: "4.0")
+
+        actual = File.read(actual_output_file_path)
+
+        assert_equal expected, actual
+
+        File.delete(actual_output_file_path)
+      end
+
+      def test_with_update_cocoapod1
+        expected = File.read("test/anticuado/ios/cocoapod_expected2")
+
+        actual_file_path = "test/anticuado/ios/cocoapod_actual"
+        actual_output_file_path = "test/anticuado/ios/cocoapod_actual_out"
+
+        Anticuado::IOS::CocoaPods.update(pod_file_in: actual_file_path, pod_file_out: actual_output_file_path, library_name: "OHHTTPStubs", new: "4.2.0")
+
+        actual = File.read(actual_output_file_path)
+
+        assert_equal expected, actual
+
+        File.delete(actual_output_file_path)
+      end
     end
   end
 end
