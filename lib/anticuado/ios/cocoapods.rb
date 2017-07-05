@@ -37,10 +37,11 @@ module Anticuado
         }.compact
       end
 
+      # TODO: [{library_name1: "version"}, {library_name2: "version"}]
       # @param [String] pod_file_in The file path to Podfile you'd like to update
       # @param [String] pod_file_out The file path to new Podfile updated. Default is nil and then `pod_file_in` is used
       #                   as the file path
-      # @param [Hash] library_name The library name you'd like to update
+      # @param [[Hash]] library_name The library name you'd like to update
       #                   [{library_name: "version"}]
       # @return [Array] Array include outdated data.
       #                 If target project have no outdated data, then return blank array such as `[]`
