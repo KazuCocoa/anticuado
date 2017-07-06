@@ -56,27 +56,7 @@ module Anticuado
       #                   {library_name: "version", library_name2: "version"}
       # @return [String] new Podfile
       def self.update(pod_file_in:, pod_file_out: nil, libraries:)
-        pod_file_out = pod_file_in if pod_file_out.nil?
-        current_pod = File.read(pod_file_in)
-
-        result = current_pod.each_line.reduce("") do |memo, line|
-          memo << if line.strip.start_with?("pod ")
-                    key = get_key libraries, line
-                    key.nil? ? line : line.sub(/[0-9|.]+/, libraries[key])
-                  else
-                    line
-                  end
-        end
-
-        File.write(pod_file_out, result)
-        result
-      end
-
-      private
-
-      def self.get_key(libraries, line)
-        libraries.each_key { |k| return k if line.include?(k.to_s) }
-        nil
+        update_with_prefix(pod_file_in: pod_file_in, pod_file_out: pod_file_out, libraries: libraries, prefix: "pod ")
       end
     end # class CocoaPods
   end # module IOS
