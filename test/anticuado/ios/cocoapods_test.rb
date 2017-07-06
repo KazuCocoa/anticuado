@@ -40,13 +40,29 @@ Analyzing dependencies
         assert_equal expected, result
       end
 
+      def test_no_update_cocoapod
+        expected = File.read("test/anticuado/ios/cocoapod_actual")
+
+        actual_file_path = "test/anticuado/ios/cocoapod_actual"
+        actual_output_file_path = "test/anticuado/ios/cocoapod_actual_out"
+
+        Anticuado::IOS::CocoaPods.update(pod_file_in: actual_file_path, pod_file_out: actual_output_file_path, libraries: {})
+
+        actual = File.read(actual_output_file_path)
+
+        assert_equal expected, actual
+
+        File.delete(actual_output_file_path)
+      end
+
+
       def test_with_update_cocoapod
         expected = File.read("test/anticuado/ios/cocoapod_expected1")
 
         actual_file_path = "test/anticuado/ios/cocoapod_actual"
         actual_output_file_path = "test/anticuado/ios/cocoapod_actual_out"
 
-        Anticuado::IOS::CocoaPods.update(pod_file_in: actual_file_path, pod_file_out: actual_output_file_path, library_name: "AFNetworking", new: "4.0")
+        Anticuado::IOS::CocoaPods.update(pod_file_in: actual_file_path, pod_file_out: actual_output_file_path, libraries: {"AFNetworking": "4.0"})
 
         actual = File.read(actual_output_file_path)
 
@@ -61,7 +77,7 @@ Analyzing dependencies
         actual_file_path = "test/anticuado/ios/cocoapod_actual"
         actual_output_file_path = "test/anticuado/ios/cocoapod_actual_out"
 
-        Anticuado::IOS::CocoaPods.update(pod_file_in: actual_file_path, pod_file_out: actual_output_file_path, library_name: "OHHTTPStubs", new: "4.2.0")
+        Anticuado::IOS::CocoaPods.update(pod_file_in: actual_file_path, pod_file_out: actual_output_file_path, libraries: {"AFNetworking": "4.0", "OHHTTPStubs": "4.2.0"})
 
         actual = File.read(actual_output_file_path)
 
