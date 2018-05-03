@@ -64,8 +64,9 @@ This library's results are like the following format:
 ```ruby
 require "anticuado"
 
-outdated = ::Anticuado::IOS::CocoaPods.outdated "path/to/project"
-::Anticuado::IOS::CocoaPods.format outdated
+cocoadpos = ::Anticuado::IOS::CocoaPods.new "path/to/project"
+outdated = cocoadpos.outdated 
+cocoadpos.format outdated
 ```
 
 #### Carthage
@@ -75,8 +76,9 @@ outdated = ::Anticuado::IOS::CocoaPods.outdated "path/to/project"
 ```ruby
 require "anticuado"
 
-outdated = ::Anticuado::IOS::Carthage.outdated "path/to/project"
-::Anticuado::IOS::Carthage.format outdated
+carthage = ::Anticuado::IOS::Carthage.new "path/to/project"
+outdated = carthage.outdated
+carthage.format outdated
 ```
 
 ### Android
@@ -91,9 +93,10 @@ https://github.com/ben-manes/gradle-versions-plugin
 ```ruby
 require "anticuado"
 
-::Anticuado::Java::Gradle.outdated "path/to/project"
-outdated = ::Anticuado::Java::Gradle.parse_json "build/dependencyUpdates"
-::Anticuado::Java::Gradle.format outdated
+gradle = ::Anticuado::Java::Gradle.new "path/to/project" 
+gradle.outdated # Writes the result to "build/dependencyUpdates" by defaylt
+outdated = gradle.parse_json "build/dependencyUpdates"
+gradle.format outdated
 ```
 
 ### Elixir
@@ -104,8 +107,9 @@ outdated = ::Anticuado::Java::Gradle.parse_json "build/dependencyUpdates"
 ```ruby
 require "anticuado"
 
-outdated = ::Anticuado::Elixir::Hex.outdated "path/to/project"
-::Anticuado::Elixir::Hex.format outdated
+hex = ::Anticuado::Elixir::Hex.new "path/to/project"
+outdated = hex.outdated 
+hex.format outdated
 ```
 
 ### Ruby
@@ -116,8 +120,9 @@ outdated = ::Anticuado::Elixir::Hex.outdated "path/to/project"
 ```ruby
 require "anticuado"
 
-outdated = ::Anticuado::Ruby::Bundler.outdated "path/to/project"
-::Anticuado::Ruby::Bundler.format outdated
+bundler = ::Anticuado::Ruby::Bundler.new "path/to/project"
+outdated = bundler.outdated 
+bundler.format outdated
 ```
 
 ## In advance
@@ -125,7 +130,7 @@ outdated = ::Anticuado::Ruby::Bundler.outdated "path/to/project"
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/anticuado. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Kazu_cocoa/anticuado. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License

@@ -1,28 +1,29 @@
 module Anticuado
   module IOS
     class Carthage < Anticuado::Base
-      # @param [String] project Path to project directory.
       # @return [String] The result of command `carthage outdated`.
-      def self.outdated(project = nil)
+      def outdated
         return puts "have no carthage command" if `which carthage`.empty?
 
-        if project
-          `carthage outdated --project-directory #{project}`
-        else
-          `carthage outdated`
-        end
+        @outdated_libraries = if @project_dir
+                                `carthage outdated --project-directory #{@project_dir}`
+                              else
+                                `carthage outdated`
+                              end
       end
 
       # @param [String] outdated The result of command `carthage outdated`
       # @return [Array] Array include outdated data.
       #                 If target project have no outdated data, then return blank array such as `[]`
-      def self.format(outdated)
-        array = outdated.split(/\R/).map(&:strip)
+      def format(outdated = nil)
+        @outdated_libraries = outdated unless outdated.nil?
+
+        array = @outdated_libraries.split(/\R/).map(&:strip)
         index = array.find_index("The following dependencies are outdated:")
 
         return [] if index.nil?
 
-        array[index + 1..array.size].map do |library|
+        @formatted_outdated_libraries = array[index + 1..array.size].map do |library|
           versions = library.split(/[\s|"]/) 
           if versions[8] =~ /Latest/
             # e.g. ["RxSwift", "", "4.1.0", "", "->", "", "4.1.2", "", "(Latest:", "", "4.1.2", ")"]

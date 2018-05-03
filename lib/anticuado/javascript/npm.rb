@@ -1,33 +1,33 @@
 module Anticuado
   module JavaScript
     class Npm < Anticuado::Base
-      # @param [String] project Path to project directory.
       # @return [String] The result of command `npm outdated`.
-      def self.outdated(project = nil)
+      def outdated
         return puts "have no npm command" if `which npm`.empty?
 
-        if project
+        if @project_dir
           current_dir = Anticuado.current_dir
-          Dir.chdir Anticuado.project_dir(project)
-          `npm install`
-          outdated_str = `npm outdated`
+          Dir.chdir Anticuado.project_dir(@project_dir)
+          @outdated_libraries = run_outdated
           Dir.chdir current_dir
         else
-          outdated_str = `npm outdated`
+          @outdated_libraries = run_outdated
         end
-        outdated_str
+        @outdated_libraries
       end
 
       # @param [String] outdated The result of command `npm outdated`
       # @return [Array] Array include outdated data.
       #                 If target project have no outdated data, then return blank array such as `[]`
-      def self.format(outdated)
-        array = outdated.split(/\R/).map(&:strip)
+      def format(outdated = nil)
+        @outdated_libraries = outdated unless outdated.nil?
+
+        array = @outdated_libraries.split(/\R/).map(&:strip)
         index = array.find_index { |line| line.scan(/\APackage\s+Current\s+Wanted\s+Latest\s+Location\z/) != [] }
 
         return [] if index.nil?
 
-        array[index + 1...array.size].map do |library|
+        @formatted_outdated_libraries = array[index + 1...array.size].map do |library|
           versions = library.split(/\s+/) # e.g. ["babel-brunch", "6.0.2", "6.0.6", "6.0.6"]
           {
               library_name: versions[0],
@@ -36,6 +36,13 @@ module Anticuado
               latest_version: versions[3]
           }
         end
+      end
+
+      private
+
+      def run_outdated
+        `npm install`
+        `npm outdated`
       end
     end # class Npm
   end # module JavaScript
