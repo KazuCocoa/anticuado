@@ -1,8 +1,7 @@
 module Anticuado
   module Ruby
     class Bundler < Anticuado::Base
-      attr_reader :project_dir
-      attr_reader :outdated_libraries
+      attr_reader :project_dir, :outdated_libraries, :formatted_outdated_libraries
 
       def initialize(project_dir = nil)
         @project_dir = project_dir
@@ -27,14 +26,14 @@ module Anticuado
       # @return [Array] Array include outdated data.
       #                 If target project have no outdated data, then return blank array such as `[]`
       def format(outdated = nil)
-        outdated = @outdated_libraries if outdated.nil?
+        @outdated_libraries = outdated unless outdated.nil?
 
-        array = outdated.split(/\R/).map(&:strip)
+        array = @outdated_libraries.split(/\R/).map(&:strip)
         index = array.find_index("Outdated gems included in the bundle:")
 
         return [] if index.nil?
 
-        array[index + 1..array.size].map { |library|
+        @formatted_outdated_libraries = array[index + 1..array.size].map { |library|
           versions = library.split(/\s/) # e.g. ["*", "jwt", "(newest", "1.5.6,", "installed", "1.5.5)"]
           if versions[0] == "*"
             {

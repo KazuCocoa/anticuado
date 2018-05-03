@@ -29,8 +29,10 @@ Bundle up to date!
         expected_0 = { library_name: "google-protobuf", current_version: "3.0.2", available_version: "3.1.0", latest_version: "3.1.0" }
         expected_1 = { library_name: "jwt", current_version: "1.5.5", available_version: "1.5.6", latest_version: "1.5.6" }
 
+        assert_equal OUTDATED_HAVE_UPDATE, bundler.outdated_libraries
+
         assert_equal expected_0, result[0]
-        assert_equal expected_1, result[1]
+        assert_equal expected_1, bundler.formatted_outdated_libraries[1]
         assert_nil result[2]
       end
 
@@ -39,6 +41,9 @@ Bundle up to date!
         result = bundler.format OUTDATED_NO_UPDATE
 
         expected = []
+
+        assert_equal OUTDATED_NO_UPDATE, bundler.outdated_libraries
+
         assert_equal expected, result
       end
     end
