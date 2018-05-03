@@ -1,34 +1,34 @@
 module Anticuado
   module Elixir
     class Hex < Anticuado::Base
-      # @param [String] project Path to project directory.
       # @return [String] The result of command `mix hex.outdated`.
-      def self.outdated(project = nil)
+      def outdated
         return puts "have no mix command" if `which mix`.empty?
         `mix local.hex --force`
 
-        if project
+        if @project_dir
           current_dir = Anticuado.current_dir
-          Dir.chdir Anticuado.project_dir(project)
-          outdated_str = `mix hex.outdated`
+          Dir.chdir Anticuado.project_dir(@project_dir)
+          @outdated_libraries = `mix hex.outdated`
           Dir.chdir current_dir
         else
-          outdated_str = `mix hex.outdated`
+          @outdated_libraries = `mix hex.outdated`
         end
-
-        outdated_str
+        @outdated_libraries
       end
 
       # @param [String] outdated The result of command `mix hex.outdated`
       # @return [Array] Array include outdated data.
       #                 If target project have no outdated data, then return blank array such as `[]`
-      def self.format(outdated)
-        array = outdated.split(/\R/).map(&:strip)
+      def format(outdated = nil)
+        @outdated_libraries = outdated unless outdated.nil?
+
+        array = @outdated_libraries.split(/\R/).map(&:strip)
         index = array.find_index { |line| line.scan(/\ADependency\s+Current\s+/) != [] }
 
         return [] if index.nil?
 
-        array[index + 1..array.size].reduce([]) do |acc, library|
+        @formatted_outdated_libraries = array[index + 1..array.size].reduce([]) do |acc, library|
           break acc if library.empty?
 
           array_lib = library.split(/\s+/)

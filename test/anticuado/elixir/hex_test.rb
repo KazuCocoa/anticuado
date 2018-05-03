@@ -55,31 +55,41 @@ revision_plate_ex    0.2.0    0.2.0   ~> 0.2
       OUTDATED
 
       def test_with_format_have_update
-        result = Anticuado::Elixir::Hex.format OUTDATED_HAVE_UPDATE
+        hex = Anticuado::Elixir::Hex.new
+        result = hex.format OUTDATED_HAVE_UPDATE
 
         expected_0 = { library_name: "logger_file_backend", current_version: "0.0.8", available_version: "0.0.9", latest_version: "0.0.9" }
         expected_1 = { library_name: "postgrex", current_version: "0.11.2", available_version: "0.12.0", latest_version: "0.12.0" }
 
+        assert_equal OUTDATED_HAVE_UPDATE, hex.outdated_libraries
+
         assert_equal expected_0, result[0]
-        assert_equal expected_1, result[1]
+        assert_equal expected_1, hex.formatted_outdated_libraries[1]
         assert_nil result[2]
       end
 
       def test_with_format_have_update_015
-        result = Anticuado::Elixir::Hex.format OUTDATED_HAVE_UPDATE_015
+        hex = Anticuado::Elixir::Hex.new
+        result = hex.format OUTDATED_HAVE_UPDATE_015
 
         expected_0 = { library_name: "dialyxir", current_version: "0.4.0", available_version: "0.4.1", latest_version: "0.4.1" }
         expected_1 = { library_name: "ex_doc", current_version: "0.14.4", available_version: "0.14.5", latest_version: "0.14.5" }
 
+        assert_equal OUTDATED_HAVE_UPDATE_015, hex.outdated_libraries
+
         assert_equal expected_0, result[0]
-        assert_equal expected_1, result[1]
+        assert_equal expected_1, hex.formatted_outdated_libraries[1]
         assert_nil result[2]
       end
 
       def test_with_format_no_update
-        result = Anticuado::Elixir::Hex.format OUTDATED_NO_UPDATE
+        hex = Anticuado::Elixir::Hex.new
+        result = hex.format OUTDATED_NO_UPDATE
 
         expected = []
+
+        assert_equal OUTDATED_NO_UPDATE, hex.outdated_libraries
+
         assert_equal expected, result
       end
     end
