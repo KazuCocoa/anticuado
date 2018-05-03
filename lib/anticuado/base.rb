@@ -1,5 +1,13 @@
 module Anticuado
   class Base
+    def outdated(_project)
+      raise NotImplementedError
+    end
+
+    def format(_outdated)
+      raise NotImplementedError
+    end
+
     def self.outdated(_project)
       raise NotImplementedError
     end

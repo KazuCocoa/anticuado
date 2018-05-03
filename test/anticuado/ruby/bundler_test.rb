@@ -23,7 +23,8 @@ Bundle up to date!
       OUTDATED
 
       def test_with_format_have_update
-        result = Anticuado::Ruby::Bundler.format OUTDATED_HAVE_UPDATE
+        bundler = Anticuado::Ruby::Bundler.new
+        result = bundler.format OUTDATED_HAVE_UPDATE
 
         expected_0 = { library_name: "google-protobuf", current_version: "3.0.2", available_version: "3.1.0", latest_version: "3.1.0" }
         expected_1 = { library_name: "jwt", current_version: "1.5.5", available_version: "1.5.6", latest_version: "1.5.6" }
@@ -34,7 +35,8 @@ Bundle up to date!
       end
 
       def test_with_format_no_update
-        result = Anticuado::Ruby::Bundler.format OUTDATED_NO_UPDATE
+        bundler = Anticuado::Ruby::Bundler.new
+        result = bundler.format OUTDATED_NO_UPDATE
 
         expected = []
         assert_equal expected, result

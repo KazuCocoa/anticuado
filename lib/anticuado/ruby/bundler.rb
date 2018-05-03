@@ -1,26 +1,34 @@
 module Anticuado
   module Ruby
     class Bundler < Anticuado::Base
-      def self.outdated(project = nil)
-        return puts "have no bundle command" if `which bundle`.empty?
+      attr_reader :project_dir
+      attr_reader :outdated_libraries
 
-        if project
-          current_dir = Anticuado.current_dir
-          Dir.chdir Anticuado.project_dir(project)
-          `bundle install`
-          outdated_str = `bundle outdated`
-          Dir.chdir current_dir
-        else
-          `bundle install`
-          outdated_str = `bundle outdated`
-        end
-        outdated_str
+      def initialize(project_dir = nil)
+        @project_dir = project_dir
+        @outdated_libraries = ''
       end
 
-      # @param [String] outdated The result of command `bundle outdated`
+      def outdated
+        return puts "have no bundle command" if `which bundle`.empty?
+
+        if @project_dir
+          current_dir = Anticuado.current_dir
+          Dir.chdir Anticuado.project_dir(@project_dir)
+          @outdated_libraries = run_outdated
+          Dir.chdir current_dir
+        else
+          @outdated_libraries = run_outdated
+        end
+        @outdated_libraries
+      end
+
+      # @param [String] outdated The result of command `bundle outdated`. If it's no argument, the method use the result of `outdated`.
       # @return [Array] Array include outdated data.
       #                 If target project have no outdated data, then return blank array such as `[]`
-      def self.format(outdated)
+      def format(outdated = nil)
+        outdated = @outdated_libraries if outdated.nil?
+
         array = outdated.split(/\R/).map(&:strip)
         index = array.find_index("Outdated gems included in the bundle:")
 
@@ -37,6 +45,13 @@ module Anticuado
             }
           end
         }.compact
+      end
+
+      private
+
+      def run_outdated
+        `bundle install`
+        `bundle outdated`
       end
     end # class Bundler
   end # module Ruby
