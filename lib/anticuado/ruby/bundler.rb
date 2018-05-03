@@ -1,13 +1,6 @@
 module Anticuado
   module Ruby
     class Bundler < Anticuado::Base
-      attr_reader :project_dir, :outdated_libraries, :formatted_outdated_libraries
-
-      def initialize(project_dir = nil)
-        @project_dir = project_dir
-        @outdated_libraries = ''
-      end
-
       def outdated
         return puts "have no bundle command" if `which bundle`.empty?
 

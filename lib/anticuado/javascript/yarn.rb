@@ -1,12 +1,11 @@
 module Anticuado
   module JavaScript
     class Yarn < Anticuado::Base
-      # @param [String] project Path to project directory.
       # @return [String] The result of command `yarn outdated`.
-      def self.outdated(project = nil)
+      def outdated
         return puts "have no yarn command" if `which yarn`.empty?
 
-        if project
+        if @project_dir
           current_dir = Anticuado.current_dir
           Dir.chdir Anticuado.project_dir(project)
           `yarn install`
@@ -21,13 +20,15 @@ module Anticuado
       # @param [String] outdated The result of command `yarn outdated`
       # @return [Array] Array include outdated data.
       #                 If target project have no outdated data, then return blank array such as `[]`
-      def self.format(outdated)
-        array = outdated.split(/\R/).map(&:strip)
+      def format(outdated = nil)
+        @outdated_libraries = outdated unless outdated.nil?
+
+        array = @outdated_libraries.split(/\R/).map(&:strip)
         index = array.find_index { |line| line.scan(/Package\s+Current\s+Wanted\s+Latest/) != [] }
 
         return [] if index.nil?
 
-        array[index + 1...(array.size - 1)].map do |library|
+        @formatted_outdated_libraries = array[index + 1...(array.size - 1)].map do |library|
           versions = library.split(/\s+/) # e.g. ["babel-brunch", "6.0.2", "6.0.6", "6.0.6"]
           {
               library_name: versions[0],
