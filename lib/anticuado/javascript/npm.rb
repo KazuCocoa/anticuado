@@ -8,13 +8,12 @@ module Anticuado
         if @project_dir
           current_dir = Anticuado.current_dir
           Dir.chdir Anticuado.project_dir(@project_dir)
-          `npm install`
-          outdated_str = `npm outdated`
+          @outdated_libraries = run_outdated
           Dir.chdir current_dir
         else
-          outdated_str = `npm outdated`
+          @outdated_libraries = run_outdated
         end
-        outdated_str
+        @outdated_libraries
       end
 
       # @param [String] outdated The result of command `npm outdated`
@@ -37,6 +36,13 @@ module Anticuado
               latest_version: versions[3]
           }
         end
+      end
+
+      private
+
+      def run_outdated
+        `npm install`
+        `npm outdated`
       end
     end # class Npm
   end # module JavaScript

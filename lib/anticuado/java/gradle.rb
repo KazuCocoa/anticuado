@@ -10,12 +10,12 @@ module Anticuado
       # @param [Bool] wrapper Use gradle wrapper or use gradle directory.
       # @param [String] format "plain", "json" or "xml". Default is "json".
       # @param [String] outdir Path to output the result. Default is "build/dependencyUpdates".
-      def self.outdated(project = nil, wrapper = false, revision = "release", format = "json", outdir = "build/dependencyUpdates")
+      def outdated(wrapper = false, revision = "release", format = "json", outdir = "build/dependencyUpdates")
         return puts "have no gradle command" if !wrapper && `which gradle`.empty?
 
-        if project
+        if @project_dir
           current_dir = Anticuado.current_dir
-          Dir.chdir Anticuado.project_dir(project)
+          Dir.chdir Anticuado.project_dir(@project_dir)
           `#{gradle(wrapper)} dependencyUpdates -Drevision=#{revision} -DoutputFormatter=#{format} -DoutputDir=#{outdir}`
           Dir.chdir current_dir
         else
@@ -27,20 +27,22 @@ module Anticuado
 
       # @param [String] file_path The result of command `gradle dependencyUpdates` with json format
       # @return [JSON] JSON data
-      def self.parse_json(file_path)
+      def parse_json(file_path)
         str = File.read(file_path)
-        JSON.parse(str)
+        @outdated_libraries = JSON.parse(str)
       end
 
       # @param [String] outdated_parsed_json The result of command `gradle dependencyUpdates` and json parsed data
       # @return [Array] Array include outdated data.
       #                 If target project have no outdated data, then return blank array such as `[]`
-      def self.format(outdated_parsed_json, filter = %w(alpha beta rc cr m))
-        outdted = outdated_parsed_json["outdated"]
+      def format(outdated_parsed_json = nil, filter = %w(alpha beta rc cr m))
+        @outdated_libraries = outdated_parsed_json unless outdated_parsed_json.nil?
+
+        outdted = @outdated_libraries["outdated"]
         return [] if outdted.nil?
         return [] if outdted["dependencies"].nil?
 
-        outdted["dependencies"].map { |library|
+        @formatted_outdated_libraries = outdted["dependencies"].map { |library|
           available_version = filter(filter, library["available"]["release"])
           latest_version = filter(filter, library["available"]["release"])
 
@@ -58,12 +60,12 @@ module Anticuado
 
       private
 
-      def self.gradle(wrapper = false)
+      def gradle(wrapper = false)
         return "./gradlew" if wrapper
         "gradle"
       end
 
-      def self.filter(revisions, string)
+      def filter(revisions, string)
         result = revisions.find { |qualifier| string.match(/(?i).*[.-]#{qualifier}[.\d-]*/) }
         return NO_VERSION if result
         string
