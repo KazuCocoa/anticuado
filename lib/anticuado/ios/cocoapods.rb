@@ -38,16 +38,6 @@ module Anticuado
         }.compact
       end
 
-      def update_lock(target_name = nil)
-        if @project_dir
-          Dir.chdir(@project_dir) do
-            do_update target_name
-          end
-        else
-          do_update target_name
-        end
-      end
-
       # @param [Array] target_names: Name of library.
       def update_lock(target_names = nil)
         return puts "have no pod command" if `which pod`.empty?

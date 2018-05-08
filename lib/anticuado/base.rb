@@ -16,7 +16,7 @@ module Anticuado
       raise NotImplementedError
     end
 
-    def update(target_name = nil)
+    def update_lock(target_name = nil)
       raise NotImplementedError
     end
   end

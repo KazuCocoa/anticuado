@@ -126,6 +126,8 @@ bundler.format outdated
 ```
 
 ## In advance
+- Create a PR automatically to update libraries
+    - See test/anticuado/git_test.rb
 
 
 ## Contributing

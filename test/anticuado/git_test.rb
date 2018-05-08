@@ -4,6 +4,7 @@ module Anticuado
   class GitTest < Minitest::Test
     def test_with_bundle
       project_name = "project/anticuado-example"
+      # https://github.com/KazuCocoa/anticuado-example
       g = ::Anticuado::GitHub.new "KazuCocoa/anticuado-example", enterprise: false
       g.clone_or_open_to project_name
 
