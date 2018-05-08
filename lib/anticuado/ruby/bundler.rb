@@ -39,26 +39,26 @@ module Anticuado
         }.compact
       end
 
-      def update(target_name = nil)
+      def update_lock(target_names = nil)
         if @project_dir
           Dir.chdir(@project_dir) do
-            do_update target_name
+            do_update_lock target_names
           end
         else
-          do_update target_name
+          do_update_lock target_names
         end
       end
 
       private
 
-      def do_update(target = nil)
-        if target.nil?
+      def do_update_lock(target_names = nil)
+        if target_names.nil?
           `bundle update`
         end
 
-        raise ArgumentError, "An argument should be Array like ['cocoapod']" unless target.is_a? Array
+        raise ArgumentError, "An argument should be Array like ['cocoapod']" unless target_names.is_a? Array
 
-        target.each { |library_name| `bundle update #{library_name}`}
+        `bundle update #{target_names.join(' ')}`
       end
 
       def run_outdated

@@ -1,18 +1,6 @@
 module Anticuado
   module IOS
     class CocoaPods < Anticuado::Base
-      # @param [String] library: Name of library.
-      # @return [String] The result of command `pod outdated`.
-      def update_lock(library: nil)
-        return puts "have no pod command" if `which pod`.empty?
-        
-        if library
-          `pod update #{library}`
-        else
-          `pod update`
-        end
-      end
-
       # @return [String] The result of command `pod outdated`.
       def outdated
         return puts "have no pod command" if `which pod`.empty?
@@ -50,6 +38,23 @@ module Anticuado
         }.compact
       end
 
+      def update_lock(target_name = nil)
+        if @project_dir
+          Dir.chdir(@project_dir) do
+            do_update target_name
+          end
+        else
+          do_update target_name
+        end
+      end
+
+      # @param [Array] target_names: Name of library.
+      def update_lock(target_names = nil)
+        return puts "have no pod command" if `which pod`.empty?
+        do_update_lock target_names
+      end
+
+      # TODO: Should fix. (Not used)
       # @param [String] pod_file_in The file path to Podfile you'd like to update
       # @param [String] pod_file_out The file path to new Podfile updated. Default is nil and then `pod_file_in` is used
       #                   as the file path
@@ -61,6 +66,15 @@ module Anticuado
       end
 
       private
+
+      def do_update_lock(target_names = nil)
+        if target_names.nil?
+          `pod update --project-directory=#{@project_dir}`
+        end
+
+        raise ArgumentError, "An argument should be Array like ['PromisesObjC']" unless target_names.is_a? Array
+        `pod update #{target_names.join(' ')} --project-directory=#{@project_dir}`
+      end
 
       def update_with_prefix(pod_file_in:, pod_file_out: nil, libraries:, prefix:)
         pod_file_out = pod_file_in if pod_file_out.nil?
