@@ -39,12 +39,11 @@ module Anticuado
         }.compact
       end
 
-      def update(target_name = '')
+      def update(target_name = nil)
         if @project_dir
-          current_dir = Anticuado.current_dir
-          Dir.chdir Anticuado.project_dir(@project_dir)
-          do_update target_name
-          Dir.chdir current_dir
+          Dir.chdir(@project_dir) do
+            do_update target_name
+          end
         else
           do_update target_name
         end
@@ -52,8 +51,14 @@ module Anticuado
 
       private
 
-      def do_update(target = '')
-        `bundle update #{target}`
+      def do_update(target = nil)
+        if target.nil?
+          `bundle update`
+        end
+
+        raise ArgumentError, "An argument should be Array like ['cocoapod']" unless target.is_a? Array
+
+        target.each { |library_name| `bundle update #{library_name}`}
       end
 
       def run_outdated
