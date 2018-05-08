@@ -15,5 +15,9 @@ module Anticuado
     def format(_outdated)
       raise NotImplementedError
     end
+
+    def update(target_name = nil)
+      raise NotImplementedError
+    end
   end
 end

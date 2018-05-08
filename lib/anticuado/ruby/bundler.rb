@@ -39,7 +39,22 @@ module Anticuado
         }.compact
       end
 
+      def update(target_name = '')
+        if @project_dir
+          current_dir = Anticuado.current_dir
+          Dir.chdir Anticuado.project_dir(@project_dir)
+          do_update target_name
+          Dir.chdir current_dir
+        else
+          do_update target_name
+        end
+      end
+
       private
+
+      def do_update(target = '')
+        `bundle update #{target}`
+      end
 
       def run_outdated
         `bundle install`
