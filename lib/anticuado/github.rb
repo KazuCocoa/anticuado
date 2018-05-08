@@ -41,7 +41,6 @@ module Anticuado
         git_push_to_remote remote_name, head_branch
         create_pull_request(base_branch: base_branch, head_branch: head_branch, title: github_pr_title(head_branch), body: github_pr_body(update_libraries))
 
-        create_a_branch_local base_branch
         delete_a_branch_local head_branch
       else
         puts "no changes"
@@ -74,6 +73,7 @@ module Anticuado
     end
 
     def delete_a_branch_local(branch_name)
+      @git.branch(branch_name).checkout # We should change current branch first
       @git.branch(branch_name).delete
     end
 
