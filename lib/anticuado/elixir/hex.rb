@@ -7,10 +7,9 @@ module Anticuado
         `mix local.hex --force`
 
         if @project_dir
-          current_dir = Anticuado.current_dir
-          Dir.chdir Anticuado.project_dir(@project_dir)
-          @outdated_libraries = `mix hex.outdated`
-          Dir.chdir current_dir
+          Dir.chdir(@project_dir) do
+            @outdated_libraries = `mix hex.outdated`
+          end
         else
           @outdated_libraries = `mix hex.outdated`
         end
