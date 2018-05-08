@@ -3,6 +3,8 @@ require 'test_helper'
 module Anticuado
   class GitTest < Minitest::Test
     def test_with_bundle
+      skip('by default')
+
       project_name = "project/anticuado-example"
       # https://github.com/KazuCocoa/anticuado-example
       g = ::Anticuado::GitHub.new "KazuCocoa/anticuado-example", enterprise: false
