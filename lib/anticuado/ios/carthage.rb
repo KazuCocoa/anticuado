@@ -44,6 +44,23 @@ module Anticuado
           end
         end
       end
+
+      # @param [Array] target_names: Name of library.
+      def update_lock(target_names = nil)
+        return puts "have no pod command" if `which pod`.empty?
+        do_update_lock target_names
+      end
+
+      private
+
+      def do_update_lock(target_names = nil)
+        if target_names.nil?
+          `carthage update --project-directory=#{@project_dir}`
+        end
+
+        raise ArgumentError, "An argument should be Array like ['Result']" unless target_names.is_a? Array
+        `carthage update #{target_names.join(' ')} --project-directory=#{@project_dir}`
+      end
     end # class Carthage
   end # module IOS
 end # module Anticuado

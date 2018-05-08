@@ -14,10 +14,9 @@ module Anticuado
         return puts "have no gradle command" if !wrapper && `which gradle`.empty?
 
         if @project_dir
-          current_dir = Anticuado.current_dir
-          Dir.chdir Anticuado.project_dir(@project_dir)
-          `#{gradle(wrapper)} dependencyUpdates -Drevision=#{revision} -DoutputFormatter=#{format} -DoutputDir=#{outdir}`
-          Dir.chdir current_dir
+          Dir.chdir(@project_dir) do
+            `#{gradle(wrapper)} dependencyUpdates -Drevision=#{revision} -DoutputFormatter=#{format} -DoutputDir=#{outdir}`
+          end
         else
           `#{gradle(wrapper)} dependencyUpdates -Drevision=#{revision} -DoutputFormatter=#{format} -DoutputDir=#{outdir}`
         end

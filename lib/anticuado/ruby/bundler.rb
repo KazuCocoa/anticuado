@@ -39,7 +39,27 @@ module Anticuado
         }.compact
       end
 
+      def update_lock(target_names = nil)
+        if @project_dir
+          Dir.chdir(@project_dir) do
+            do_update_lock target_names
+          end
+        else
+          do_update_lock target_names
+        end
+      end
+
       private
+
+      def do_update_lock(target_names = nil)
+        if target_names.nil?
+          `bundle update`
+        end
+
+        raise ArgumentError, "An argument should be Array like ['cocoapod']" unless target_names.is_a? Array
+
+        `bundle update #{target_names.join(' ')}`
+      end
 
       def run_outdated
         `bundle install`
