@@ -32,7 +32,7 @@ module Anticuado
     def create_a_new_pull_request(base_branch:, head_branch: (Time.now.strftime '%Y%m%d-%H%M%S'), update_libraries: nil)
       remote_name = 'origin'
 
-      if !@git.status.changed.empty?
+      begin
         create_a_branch_local head_branch
         commit_all_changes
 
@@ -40,8 +40,8 @@ module Anticuado
         create_pull_request(base_branch: base_branch, head_branch: head_branch, title: github_pr_title(head_branch), body: github_pr_body(update_libraries))
 
         delete_a_branch_local head_branch
-      else
-        puts "no changes"
+      rescue Git::GitExecuteError => e
+        puts "no changes: #{e}, #{e.message}"
       end
     end
 
