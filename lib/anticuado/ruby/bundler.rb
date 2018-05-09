@@ -54,11 +54,10 @@ module Anticuado
       def do_update_lock(target_names = nil)
         if target_names.nil?
           `bundle update`
+        else
+          raise ArgumentError, "An argument should be Array like ['cocoapod']" unless target_names.is_a? Array
+          `bundle update #{target_names.join(' ')}`          
         end
-
-        raise ArgumentError, "An argument should be Array like ['cocoapod']" unless target_names.is_a? Array
-
-        `bundle update #{target_names.join(' ')}`
       end
 
       def run_outdated
