@@ -60,10 +60,10 @@ module Anticuado
       def do_update_lock(target_names = nil)
         if target_names.nil?
           `pod update --project-directory=#{@project_dir}`
+        else
+          raise ArgumentError, "An argument should be Array like ['PromisesObjC']" unless target_names.is_a? Array
+          `pod update #{target_names.join(' ')} --project-directory=#{@project_dir}`          
         end
-
-        raise ArgumentError, "An argument should be Array like ['PromisesObjC']" unless target_names.is_a? Array
-        `pod update #{target_names.join(' ')} --project-directory=#{@project_dir}`
       end
 
       def update_with_prefix(pod_file_in:, pod_file_out: nil, libraries:, prefix:)
