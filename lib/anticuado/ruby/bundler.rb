@@ -1,15 +1,15 @@
 module Anticuado
   module Ruby
     class Bundler < Anticuado::Base
-      def outdated
+      def outdated(option = '')
         return puts "have no bundle command" if `which bundle`.empty?
 
         if @project_dir
           Dir.chdir(@project_dir) do
-            @outdated_libraries = run_outdated
+            @outdated_libraries = run_outdated option
           end
         else
-          @outdated_libraries = run_outdated
+          @outdated_libraries = run_outdated option
         end
         @outdated_libraries
       end
@@ -59,8 +59,8 @@ module Anticuado
         end
       end
 
-      def run_outdated
-        `bundle install`
+      def run_outdated(option)
+        `bundle install #{option}`
         `bundle outdated`
       end
     end # class Bundler
