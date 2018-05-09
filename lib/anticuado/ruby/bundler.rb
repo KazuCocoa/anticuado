@@ -5,10 +5,9 @@ module Anticuado
         return puts "have no bundle command" if `which bundle`.empty?
 
         if @project_dir
-          current_dir = Anticuado.current_dir
-          Dir.chdir Anticuado.project_dir(@project_dir)
-          @outdated_libraries = run_outdated
-          Dir.chdir current_dir
+          Dir.chdir(@project_dir) do
+            @outdated_libraries = run_outdated
+          end
         else
           @outdated_libraries = run_outdated
         end
@@ -42,7 +41,6 @@ module Anticuado
       def update_lock(target_names = nil)
         if @project_dir
           Dir.chdir(@project_dir) do
-            puts Dir.pwd
             do_update_lock target_names
           end
         else

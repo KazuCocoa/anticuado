@@ -56,10 +56,10 @@ module Anticuado
       def do_update_lock(target_names = nil)
         if target_names.nil?
           `carthage update --project-directory=#{@project_dir}`
+        else
+          raise ArgumentError, "An argument should be Array like ['Result']" unless target_names.is_a? Array
+          `carthage update #{target_names.join(' ')} --project-directory=#{@project_dir}`
         end
-
-        raise ArgumentError, "An argument should be Array like ['Result']" unless target_names.is_a? Array
-        `carthage update #{target_names.join(' ')} --project-directory=#{@project_dir}`
       end
     end # class Carthage
   end # module IOS
