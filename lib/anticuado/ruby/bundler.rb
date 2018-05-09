@@ -42,6 +42,7 @@ module Anticuado
       def update_lock(target_names = nil)
         if @project_dir
           Dir.chdir(@project_dir) do
+            puts Dir.pwd
             do_update_lock target_names
           end
         else
