@@ -16,7 +16,7 @@ module Anticuado
                 else
                   ::Octokit::Client.new(:access_token => ENV['GITHUB_TOKEN'])
                 end
-      @repo_uri = "git@#{URI.parse(@client.web_endpoint).host}:#{@repo_name}.git"
+      @repo_uri = "git@#{URI.parse(@client.api_endpoint).host}:#{@repo_name}.git"
     end
 
     def clone_or_open_to(target_path)
@@ -31,8 +31,6 @@ module Anticuado
 
     def create_a_new_pull_request(base_branch:, head_branch: (Time.now.strftime '%Y%m%d-%H%M%S'), update_libraries: nil)
       remote_name = 'origin'
-
-      @git.checkout base_branch
 
       if !@git.status.changed.empty?
         create_a_branch_local head_branch
@@ -73,7 +71,7 @@ module Anticuado
     end
 
     def delete_a_branch_local(branch_name)
-      @git.branch(branch_name).checkout # We should change current branch first
+      @git.checkout # We should change current branch first
       @git.branch(branch_name).delete
     end
 
