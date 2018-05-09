@@ -10,6 +10,8 @@ module Anticuado
       g = ::Anticuado::GitHub.new "KazuCocoa/anticuado-example", enterprise: false
       g.clone_or_open_to project_name
 
+      ENV['BUNDLE_GEMFILE'] = 'Gemfile' # to search Gemfile in current directly
+
       update_libraries_list = ['anticuado', 'cocoapods']
       bundler = ::Anticuado::Ruby::Bundler.new project_name
       bundler.update_lock update_libraries_list
