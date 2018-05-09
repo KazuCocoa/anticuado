@@ -16,7 +16,7 @@ module Anticuado
                 else
                   ::Octokit::Client.new(:access_token => ENV['GITHUB_TOKEN'])
                 end
-      @repo_uri = "git@#{URI.parse(@client.api_endpoint).host}:#{@repo_name}.git"
+      @repo_uri = "git@#{URI.parse(enterprise ? @client.api_endpoint : @client.web_endpoint).host}:#{@repo_name}.git"
     end
 
     def clone_or_open_to(target_path)
