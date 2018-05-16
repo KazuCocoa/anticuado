@@ -5,7 +5,7 @@ module Anticuado
     def test_with_bundle
       skip('by default')
 
-      project_name = "project/anticuado-example"
+      project_name = "../project/anticuado-example" # To avoid nested bundler
       # https://github.com/KazuCocoa/anticuado-example
       g = ::Anticuado::GitHub.new "KazuCocoa/anticuado-example", enterprise: false
       g.clone_or_open_to project_name
