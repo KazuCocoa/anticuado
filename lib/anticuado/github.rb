@@ -14,7 +14,7 @@ module Anticuado
                       api_endpoint: ENV['GHE_HOST'],
                       )
                 else
-                  ::Octokit::Client.new(:access_token => ENV['GITHUB_TOKEN'])
+                  ::Octokit::Client.new(access_token: ENV['GITHUB_TOKEN'])
                 end
       @repo_uri = "git@#{URI.parse(enterprise ? @client.api_endpoint : @client.web_endpoint).host}:#{@repo_name}.git"
     end
