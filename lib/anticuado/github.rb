@@ -11,7 +11,7 @@ module Anticuado
       @client = if enterprise
                   ::Octokit::Client.new(
                       access_token: ENV['GHE_ACCESS_TOKEN'] || 'dummy_token',
-                      api_endpoint: ENV['GHE_HOST'],
+                      api_endpoint: ENV['GHE_API_ENDPOINT'], # 'https://example.api.endpoint/api/v3/'
                       )
                 else
                   ::Octokit::Client.new(access_token: ENV['GITHUB_TOKEN'])
