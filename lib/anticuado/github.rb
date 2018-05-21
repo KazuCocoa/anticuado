@@ -5,13 +5,13 @@ module Anticuado
   class GitHub
     attr_reader :repo_uri, :repo_name, :git, :client
 
-    def initialize(repository_name, enterprise: true)
+    def initialize(repository_name, enterprise: true, api_endpoint: nil)
       @repo_name = repository_name
 
       @client = if enterprise
                   ::Octokit::Client.new(
                       access_token: ENV['GHE_ACCESS_TOKEN'] || 'dummy_token',
-                      api_endpoint: ENV['GHE_API_ENDPOINT'], # 'https://example.api.endpoint/api/v3/'
+                      api_endpoint: api_endpoint || ENV['GHE_API_ENDPOINT'], # 'https://example.api.endpoint/api/v3/'
                       )
                 else
                   ::Octokit::Client.new(access_token: ENV['GITHUB_TOKEN'])
