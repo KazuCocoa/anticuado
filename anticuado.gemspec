@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency "git", ">= 1.3", "< 1.6"
-  spec.add_runtime_dependency "octokit", ">= 4.8", "< 4.14"
+  spec.add_runtime_dependency "octokit", ">= 4.8", "< 4.15"
 
   spec.add_development_dependency "bundler", ">= 1.12"
   spec.add_development_dependency "rake", "~> 12.3"
